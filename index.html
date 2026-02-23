@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso LMS: Microsoft Word</title>
+    <style>
+        /* =========================================
+           VARIABLES Y TIPOGRAFÍA
+           ========================================= */
+        :root {
+            --primary: #4F46E5;
+            --secondary: #10B981;
+            --dark: #1F2937;
+            --light: #F9FAFB;
+            --gray: #E5E7EB;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light);
+            color: var(--dark);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* =========================================
+           MENÚ LATERAL (SIDEBAR)
+           ========================================= */
+        aside {
+            width: 280px;
+            background-color: var(--dark);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        aside h2 {
+            text-align: center;
+            padding: 20px 0;
+            margin: 0;
+            background-color: #111827;
+            font-size: 1.2rem;
+        }
+
+        aside nav {
+            display: flex;
+            flex-direction: column;
+        }
+
+        aside nav a {
+            color: #D1D5DB;
+            text-decoration: none;
+            padding: 15px 20px;
+            border-bottom: 1px solid #374151;
+            transition: background-color 0.3s;
+        }
+
+        aside nav a:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* =========================================
+           CONTENIDO PRINCIPAL Y FOOTER
+           ========================================= */
+        main {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+            scroll-behavior: smooth;
+        }
+
+        section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 40px;
+        }
+
+        h1, h2, h3, h4 { color: var(--primary); }
+        h1 { border-bottom: 3px solid var(--secondary); padding-bottom: 10px; }
+        p, li { line-height: 1.6; }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            border-top: 1px solid var(--gray);
+            color: #6B7280;
+            font-size: 0.95rem;
+            font-weight: bold;
+        }
+
+        /* =========================================
+           IMÁGENES Y TABLAS
+           ========================================= */
+        .img-directa {
+            max-width: 100%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin: 20px 0;
+            display: block;
+            border: 1px solid var(--gray);
+            background-color: #f8f9fa;
+        }
+
+        /* DISEÑO ESPECÍFICO PARA LA SECCIÓN ARCHIVO */
+        .layout-archivo {
+            display: flex;
+            border: 1px solid var(--gray);
+            margin: 20px 0;
+            background-color: white;
+        }
+        
+        .archivo-img-col {
+            flex: 0 0 150px;
+            border-right: 1px solid var(--gray);
+            background-color: #2b579a;
+        }
+        
+        .archivo-img-col img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .archivo-text-col {
+            flex: 1;
+            padding: 20px 25px;
+        }
+        
+        .archivo-text-col p:first-child {
+            margin-top: 0;
+        }
+
+        .icon-inline {
+            height: 30px;
+            vertical-align: middle;
+            margin: 0 5px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .icon-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+            padding: 15px;
+            background: var(--gray);
+            border-radius: 8px;
+            justify-content: center;
+        }
+
+        .icon-gallery img {
+            height: 40px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            background: white;
+            padding: 2px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid var(--gray);
+            padding: 12px;
+            text-align: left;
+            vertical-align: middle;
+        }
+
+        th { background-color: var(--primary); color: white; }
+
+        /* =========================================
+           ACTIVIDADES PRÁCTICAS Y BOTÓN WORD
+           ========================================= */
+        .actividad {
+            background-color: #EFF6FF;
+            border-left: 5px solid var(--primary);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .actividad h3 { margin-top: 0; color: #1E40AF; border-bottom: 1px solid #BFDBFE; padding-bottom: 10px; }
+        .actividad h4 { color: #1E3A8A; margin-bottom: 10px; }
+
+        .btn-word {
+            display: inline-block;
+            background-color: #2b579a;
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .btn-word:hover {
+            background-color: #1e3f6f;
+            transform: translateY(-2px);
+        }
+
+        .text-box {
+            background-color: white;
+            border: 1px solid #CBD5E1;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 1.05rem;
+            color: black;
+        }
+
+        /* =========================================
+           CUESTIONARIO Y MODAL
+           ========================================= */
+        .quiz-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            border: 2px solid var(--primary);
+        }
+
+        .question { margin-bottom: 20px; }
+        .question label { 
+            display: block; 
+            margin: 8px 0; 
+            cursor: pointer; 
+            padding: 5px; 
+            border-radius: 4px; 
+        }
+        .question label:hover { background-color: #F3F4F6; }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover { background-color: #3730A3; }
+        button:disabled { background-color: #9CA3AF; cursor: not-allowed; }
+
+        .attempt-info {
+            margin-top: 15px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 500px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .modal-content h2 { color: var(--primary); margin-top: 0; }
+        .modal-student-name { font-size: 1.2rem; }
+        .score-display { font-size: 3rem; font-weight: bold; color: var(--secondary); margin: 20px 0; }
+        .range-display { font-size: 1.2rem; font-weight: bold; padding: 10px; border-radius: 5px; margin-bottom: 20px; }
+        .close-btn { background-color: #EF4444; margin-top: 20px; }
+        .close-btn:hover { background-color: #B91C1C; }
+    </style>
+</head>
+<body>
+
+    <aside>
+        <h2>LMS Word Pro</h2>
+        <nav>
+            <a href="#cinta">La cinta de Word</a>
+            <a href="#archivo">La pestaña Archivo</a>
+            <a href="#ortografia">Configuración de ortografía</a>
+            <a href="#inicio">La pestaña Inicio</a>
+            <a href="#fuente">Grupo Fuente</a>
+            <a href="#parrafo">Grupo Párrafo</a>
+            <a href="#estilos">Grupo Estilos</a>
+            <a href="#evaluacion">Evaluación Final</a>
+        </nav>
+    </aside>
+
+    <main>
+        <h1>Curso de Word: primeros pasos</h1>
+        <section id="cinta">
+            <h2>La cinta de Word</h2>
+            <img src="https://i.ibb.co/ccTPQwLZ/00-Cinta-WORD.png" alt="00Cinta WORD" class="img-directa">
+            <p>La cinta de Word es la barra superior que organiza todas las herramientas del programa en pestañas. Cada pestaña agrupa funciones específicas para trabajar con el documento.</p>
+            <p>En la figura que compartiste se ven las siguientes pestañas principales:</p>
+            <ul>
+                <li><strong>Archivo:</strong> opciones para abrir, guardar, imprimir y exportar documentos.</li>
+                <li><strong>Inicio:</strong> contiene las herramientas más usadas: copiar, pegar, tipo y tamaño de letra, negrita, cursiva, subrayado, color de texto, alineación de párrafos y estilos.</li>
+                <li><strong>Insertar:</strong> permite añadir tablas, imágenes, formas, gráficos y otros elementos.</li>
+                <li><strong>Diseño:</strong> controla el aspecto visual del documento (colores, fuentes, efectos).</li>
+                <li><strong>Disposición:</strong> organiza márgenes, orientación de página, saltos y columnas.</li>
+                <li><strong>Referencias:</strong> para insertar citas, bibliografía, índices y notas al pie.</li>
+                <li><strong>Correspondencia:</strong> útil para combinar correspondencia y crear sobres o etiquetas.</li>
+                <li><strong>Revisar:</strong> ofrece herramientas de ortografía, comentarios y control de cambios.</li>
+                <li><strong>Vista:</strong> cambia la forma en que ves el documento (lectura, diseño de impresión, zoom).</li>
+                <li><strong>Ayuda:</strong> acceso a soporte y recursos de aprendizaje.</li>
+            </ul>
+        </section>
+
+        <section id="archivo">
+            <h2>La pestaña Archivo en Word</h2>
+            
+            <div class="layout-archivo">
+                <div class="archivo-img-col">
+                    <img src="https://i.ibb.co/5W7ZJ1M9/01-Archivo.png" alt="01Archivo">
+                </div>
+                <div class="archivo-text-col">
+                    <p>La pestaña <strong>Archivo</strong> abre lo que se conoce como la <em>vista backstage</em>. Allí no editamos el texto directamente, sino que encontramos todas las opciones relacionadas con la <strong>gestión del documento</strong>.</p>
+                    <p>En la figura que compartiste se observan las siguientes opciones:</p>
+                    <ul>
+                        <li><strong>Inicio:</strong> muestra los documentos recientes y plantillas disponibles.</li>
+                        <li><strong>Nuevo:</strong> permite crear un documento en blanco o usar plantillas (currículum, cartas, etc.).</li>
+                        <li><strong>Abrir:</strong> acceder a documentos guardados en el equipo, OneDrive u otras ubicaciones.</li>
+                        <li><strong>Información:</strong> ver detalles del archivo (tamaño, autor, permisos).</li>
+                        <li><strong>Guardar / Guardar como:</strong> almacenar el documento en el equipo o en la nube, con el nombre que elijas.</li>
+                        <li><strong>Historial:</strong> consultar versiones anteriores del documento.</li>
+                        <li><strong>Imprimir:</strong> configurar la impresora, páginas y orientación antes de imprimir.</li>
+                        <li><strong>Compartir:</strong> enviar el documento por correo o compartirlo en línea.</li>
+                        <li><strong>Exportar:</strong> convertir el archivo a otros formatos, como PDF.</li>
+                        <li><strong>Cerrar:</strong> salir del documento actual.</li>
+                        <li><strong>Cuenta:</strong> administrar tu perfil de usuario y opciones de Word.</li>
+                        <li><strong>Opciones:</strong> personalizar la configuración del programa</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="ortografia">
+            <h2>Configuración de ortografía en Word (Opciones de Revisión)</h2>
+            <img src="https://i.ibb.co/99HSMdr0/02-Revisi-n.png" alt="02Revisión" class="img-directa">
+            <p>En la sección “Al corregir la ortografía en los programas de Microsoft Office”, se encuentran varias casillas que permiten personalizar cómo Word revisa los textos.</p>
+            <p>La configuración recomendada es la siguiente:</p>
+            <ul>
+                <li>☐ Omitir palabras en MAYÚSCULAS → No se activa, porque queremos que Word revise todo, incluso palabras escritas en mayúsculas.</li>
+                <li>☐ Omitir palabras que contengan números → No se activa, para que también se detecten errores en textos con números.</li>
+                <li>☐ Omitir archivos y direcciones de Internet → No se activa, así Word revisa cualquier texto escrito.</li>
+                <li>✅ Marcar palabras repetidas → Se activa, porque ayuda a detectar cuando el estudiante escribe dos veces la misma palabra por error.</li>
+            </ul>
+            <h3>¿Por qué configurarlo así?</h3>
+            <p>De esta manera, Word revisa todo el texto sin excepciones y muestra los errores ortográficos y gramaticales directamente en el documento. Esto asegura que los estudiantes puedan corregir sus escritos en tiempo real y mejorar la calidad de sus trabajos.</p>
+        </section>
+
+        <section id="inicio">
+            <h2>La pestaña Inicio en Word</h2>
+            <p>La pestaña Inicio es la más utilizada porque reúne las herramientas básicas para escribir, copiar, pegar y dar formato al texto. En la figura que compartiste se observa el grupo Portapapeles, que incluye las siguientes funciones:</p>
+            <img src="https://i.ibb.co/qLcjr2PD/03Pegar.png" alt="03Pegar" class="img-directa">
+            <ul>
+                <li><strong>Pegar:</strong> inserta el texto o elemento que hayas copiado previamente.</li>
+                <li><strong>Cortar:</strong> elimina el texto del lugar original y lo guarda en el portapapeles para pegarlo en otro sitio.</li>
+                <li><strong>Copiar:</strong> guarda una copia del texto o elemento seleccionado en el portapapeles, sin eliminarlo del lugar original.</li>
+                <li><strong>Copiar formato:</strong> permite aplicar el mismo estilo (tipo de letra, tamaño, color, etc.) de un texto a otro.</li>
+            </ul>
+            <h3>¿Cómo se usan?</h3>
+            <ul>
+                <li>Selecciona un texto.</li>
+                <li>Haz clic en Copiar o Cortar.</li>
+                <li>Coloca el cursor en el lugar donde quieres que aparezca y pulsa Pegar.</li>
+                <li>Para Copiar formato, selecciona un texto ya formateado, haz clic en el ícono del pincel y luego selecciona el texto al que quieres aplicar el mismo estilo.</li>
+            </ul>
+        </section>
+
+        <section id="fuente">
+            <h2>Grupo Fuente en la pestaña Inicio</h2>
+            <img src="https://i.ibb.co/1tprpwPT/04Fuente.png" alt="04Fuente" class="img-directa">
+            <p>El grupo Fuente permite dar formato al texto, es decir, cambiar su apariencia para hacerlo más claro, atractivo o destacar información importante. En la figura que compartiste se observan las siguientes herramientas principales:</p>
+            <ul>
+                <li><strong>Tipo de letra:</strong> elegir la fuente (ejemplo: Times New Roman, Arial).</li>
+                <li><strong>Tamaño de letra:</strong> ajustar el tamaño del texto (ejemplo: 12, 14, 18).</li>
+                <li><strong>Negrita (N):</strong> resalta el texto haciéndolo más grueso.</li>
+                <li><strong>Cursiva (K):</strong> inclina el texto para darle énfasis.</li>
+                <li><strong>Subrayado (S):</strong> coloca una línea debajo del texto.</li>
+                <li><strong>Tachado:</strong> dibuja una línea sobre el texto.</li>
+                <li><strong>Subíndice (x₂):</strong> coloca el texto más pequeño y abajo (ejemplo: fórmulas químicas H₂O).</li>
+                <li><strong>Superíndice (x²):</strong> coloca el texto más pequeño y arriba (ejemplo: potencias 5²).</li>
+                <li><strong>Color de fuente:</strong> cambia el color del texto.</li>
+                <li><strong>Resaltado:</strong> marca el texto con un color de fondo, como si fuera un marcador.</li>
+                <li><strong>Borrar formato:</strong> elimina todos los estilos y deja el texto en formato normal.</li>
+            </ul>
+
+            <div class="actividad">
+                <h3>Actividad práctica 01</h3>
+                <a href="ms-word:" class="btn-word">📝 Abrir Microsoft Word</a>
+                <ul>
+                    <li>Escribe tu nombre en el documento.</li>
+                    <li>Aplica negrita a tu nombre.</li>
+                    <li>Cambia el tamaño de la letra a 18.</li>
+                    <li>Resalta tu nombre con color amarillo.</li>
+                    <li>Escribe la fórmula H₂O usando subíndice.</li>
+                    <li>Escribe la potencia 5² usando superíndice.</li>
+                </ul>
+            </div>
+
+            <h2>Grupo Fuente – Cambio de mayúsculas y minúsculas</h2>
+            <img src="https://i.ibb.co/5hSMJVGn/05-Mayusculas.png" alt="05Mayusculas" class="img-directa">
+            <p>Dentro del grupo Fuente de la pestaña Inicio, además de las opciones de formato de texto (negrita, cursiva, subrayado, color, etc.), existe una herramienta muy útil: Cambiar mayúsculas y minúsculas.</p>
+            <p>En la figura que compartiste se observa el menú desplegable con las siguientes opciones:</p>
+            <ul>
+                <li><strong>Tipo oración:</strong> convierte la primera letra de la frase en mayúscula y el resto en minúsculas.</li>
+                <li><strong>minúscula:</strong> transforma todo el texto seleccionado en letras minúsculas.</li>
+                <li><strong>MAYÚSCULAS:</strong> convierte todo el texto en letras mayúsculas.</li>
+                <li><strong>Poner En Mayúsculas Cada Palabra:</strong> coloca la primera letra de cada palabra en mayúscula.</li>
+                <li><strong>Alternar mayúsculas y minúsculas:</strong> invierte el formato actual (si está en mayúsculas pasa a minúsculas y viceversa).</li>
+            </ul>
+            <h3>¿Cómo se usa?</h3>
+            <ul>
+                <li>Selecciona el texto que quieras modificar.</li>
+                <li>Haz clic en el botón Aa del grupo Fuente.</li>
+                <li>Elige la opción que prefieras del menú desplegable.</li>
+            </ul>
+
+            <div class="actividad">
+                <h3>Actividad práctica 02</h3>
+                <a href="ms-word:" class="btn-word">📝 Abrir Microsoft Word</a>
+                <ul>
+                    <li>Escribe la frase: “Word es un programa de escritura”.</li>
+                    <li>Usa la opción MAYÚSCULAS para que todo quede en mayúsculas.</li>
+                    <li>Escribe la frase “colegio integral san paulo” y aplica Poner En Mayúsculas Cada Palabra.</li>
+                    <li>Finalmente, escribe la frase “este mundo está lleno de personas únicas” y prueba la opción Alternar mayúsculas y minúsculas para ver cómo cambia el texto.</li>
+                </ul>
+            </div>
+
+            <h2>Grupo Fuente – WordArt y efectos de texto</h2>
+            <img src="https://i.ibb.co/W4Spq1TV/06-Word-Art.png" alt="06Word Art" class="img-directa">
+            <p>En el grupoFuente de la pestaña Inicio, además de las opciones básicas de formato, existe la herramienta WordArt y los efectos de texto.<br>
+            Estas funciones permiten dar un estilo visual más llamativo a las palabras, ideal para títulos o textos que se quieran destacar.</p>
+            <p>En la figura que compartiste se observan las siguientes opciones:</p>
+            <ul>
+                <li><strong>Estilos de WordArt:</strong> diferentes diseños de letras con colores, sombras y efectos predefinidos.</li>
+                <li><strong>Contorno:</strong> cambia el borde del texto (color, grosor, estilo de línea).</li>
+                <li><strong>Sombra:</strong> agrega una sombra detrás del texto para darle profundidad.</li>
+                <li><strong>Reflejo:</strong> crea un efecto de reflejo debajo del texto.</li>
+                <li><strong>Iluminado (Glow):</strong> rodea el texto con un resplandor de color.</li>
+                <li><strong>Estilos de número, ligaduras y conjuntos de estilos:</strong> opciones avanzadas de tipografía para personalizar aún más la apariencia del texto.</li>
+            </ul>
+            <h3>¿Cómo se usan?</h3>
+            <ul>
+                <li>Selecciona el texto que quieras destacar.</li>
+                <li>Haz clic en el botón de WordArt o efectos de texto.</li>
+                <li>Elige el estilo que prefieras.</li>
+                <li>Ajusta el contorno, sombra o reflejo según el efecto que quieras lograr.</li>
+            </ul>
+
+            <div class="actividad">
+                <h3>Actividad práctica 03</h3>
+                <a href="ms-word:" class="btn-word">📝 Abrir Microsoft Word</a>
+                <ul>
+                    <li>Escribe un título en tu documento: “Mi primer trabajo en Word”.</li>
+                    <li>Aplica un estilo de WordArt con colores llamativos.</li>
+                    <li>Añade sombra y reflejo al título.</li>
+                    <li>Cambia el contorno del texto a color azul.</li>
+                </ul>
+            </div>
+
+            <h2>Grupo Fuente – Resaltado de texto</h2>
+            <img src="https://i.ibb.co/Rpz1BpV6/07-Resaltado.png" alt="07Resaltado" class="img-directa">
+            <p>En el grupoFuente de la pestaña Inicio, además de cambiar el tipo y tamaño de letra, existe la herramienta de resaltado de texto. Esta función permite marcar palabras o frases con un color de fondo, como si se usara un marcador, para destacar información importante.</p>
+            <p>En la figura que compartiste se observan las opciones de color disponibles: amarillo, verde, azul, rojo, magenta, gris, negro, entre otros. También aparecen dos botones adicionales:</p>
+            <ul>
+                <li><strong>Sin color:</strong> elimina el resaltado aplicado al texto.</li>
+                <li><strong>Detener resaltado:</strong> desactiva la herramienta para que el cursor vuelva a escribir normalmente sin aplicar color.</li>
+            </ul>
+            <h3>¿Cómo se usa?</h3>
+            <ul>
+                <li>Selecciona el texto que quieras destacar.</li>
+                <li>Haz clic en el ícono de resaltado (parece un marcador).</li>
+                <li>Elige el color que prefieras.</li>
+                <li>El texto quedará marcado con ese color de fondo.</li>
+            </ul>
+
+            <div class="actividad">
+                <h3>Actividad práctica 04</h3>
+                <a href="ms-word:" class="btn-word">📝 Abrir Microsoft Word</a>
+                <ul>
+                    <li>Escribe un párrafo sobre lo que más te gusta en tu documento.</li>
+                    <li>Resalta una palabra en amarillo.</li>
+                    <li>Resalta otra palabra en verde.</li>
+                </ul>
+            </div>
+
+            <h2>Grupo Fuente – Color de texto</h2>
+            <img src="https://i.ibb.co/qMzXn5Nf/08-Color-Texto.png" alt="08Color Texto" class="img-directa">
+            <p>En el grupoFuente de la pestaña Inicio, además de cambiar el tipo y tamaño de letra, se encuentra la opción de color de fuente, que permite modificar el color del texto para destacar palabras o frases importantes.</p>
+            <p>En la figura que compartiste se observan las siguientes opciones:</p>
+            <ul>
+                <li><strong>Colores del tema:</strong> son los colores principales del documento, diseñados para mantener una apariencia uniforme (ejemplo: azul, verde, naranja).</li>
+                <li><strong>Colores estándar:</strong> incluyen colores básicos como rojo, amarillo, azul, verde, negro y gris.</li>
+                <li><strong>Automático:</strong> aplica el color predeterminado (generalmente negro).</li>
+                <li><strong>Más colores…:</strong> abre una paleta avanzada para elegir cualquier color personalizado.</li>
+                <li><strong>Degradado:</strong> permite aplicar un efecto de transición entre varios colores en el texto.</li>
+            </ul>
+            <h3>¿Cómo se usa?</h3>
+            <ul>
+                <li>Selecciona el texto que quieras modificar.</li>
+                <li>Haz clic en el ícono de color de fuente (la letra “A” con una barra de color debajo).</li>
+                <li>Elige el color que prefieras en el menú desplegable.</li>
+                <li>El texto cambiará inmediatamente al color seleccionado.</li>
+            </ul>
+
+            <div class="actividad">
+                <h3>Actividad práctica 05</h3>
+                <a href="ms-word:" class="btn-word">📝 Abrir Microsoft Word</a>
+                <ul>
+                    <li>Escribe un título en tu documento: “Práctica de Word”.</li>
+                    <li>Cambia el color del título a rojo.</li>
+                    <li>Escribe una frase y cambia su color a azul.</li>
+                    <li>Usa la opción Más colores… para elegir un color personalizado.</li>
+                    <li>Aplica un degradado a un texto corto para ver el efecto.</li>
+                </ul>
+            </div>
+
+            <div class="actividad">
+                <h3>Actividad integradora 01 – Conciencia de sí mismo (Autoconocimiento)</h3>
+                <a href="ms-word:" class="btn-word">📝 Abrir Microsoft Word</a>
+                <p>Objetivo: aplicar las herramientas de formato de texto (Fuente) en Word, cuidando la ortografía y redacción de los párrafos, mientras se reflexiona sobre el propio valor, emociones y capacidades.</p>
+                <h4>Instrucciones</h4>
+                <ul>
+                    <li>Abre un documento en Word.</li>
+                    <li>Escribe un párrafo titulado “Así soy yo”, donde respondas:
+                        <ul>
+                            <li>Una cualidad personal que más valoras en ti.</li>
+                            <li>Una emoción que reconoces en tu vida escolar.</li>
+                            <li>Una capacidad o habilidad que te ayuda a aprender mejor.</li>
+                            <li>Procura que el párrafo esté bien redactado y sin errores ortográficos.</li>
+                        </ul>
+                    </li>
+                    <li>Aplica las siguientes herramientas del grupo Fuente:
+                        <ul>
+                            <li>Negrita: coloca en negrita tu cualidad personal.</li>
+                            <li>Cursiva: escribe tu emoción en cursiva.</li>
+                            <li>Resaltado: marca en amarillo la frase que consideres más importante de tu párrafo.</li>
+                            <li>Color de fuente: cambia a azul la capacidad o habilidad que mencionaste.</li>
+                            <li>WordArt: inserta un título llamativo “Yo me conozco” usando un estilo de WordArt.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <h4>Reflexión socioemocional</h4>
+                <p>Al terminar la actividad, responde en el mismo documento:</p>
+                <ul>
+                    <li>¿Qué aprendiste sobre ti al escribir este párrafo?</li>
+                    <li>¿Cómo te ayuda reconocer tus emociones y capacidades a sentirte más seguro en tu aprendizaje?</li>
+                    <li>¿Por qué es importante cuidar la ortografía y la redacción al expresar quién eres?</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="parrafo">
+            <h2>Grupo Párrafo</h2>
+            <img src="https://i.ibb.co/fjFtYdN/09-Parrafo.png" alt="09Parrafo" class="img-directa">
+            <p>El grupo Párrafo reúne las herramientas para organizar y dar estructura al texto dentro de un documento. Estas opciones permiten que los párrafos sean claros, ordenados y fáciles de leer, lo cual es fundamental para una buena redacción y ortografía.</p>
+            <h3>Principales funciones del grupo Párrafo:</h3>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Descripción</th>
+                        <th style="text-align: center; width: 150px;">Ícono</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Viñetas y numeración:</strong> crean listas ordenadas o con puntos para organizar ideas.</td>
+                        <td style="text-align: center;"><img src="https://i.ibb.co/BH6Tm0wR/image.png" alt="Viñetas y numeración" style="height: 35px; border: 1px solid var(--gray); border-radius: 4px; padding: 2px;"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Alineación:</strong><br>
+                        Izquierda → texto alineado al margen izquierdo.<br>
+                        Centro → texto centrado.<br>
+                        Derecha → texto alineado al margen derecho.<br>
+                        Justificado → texto alineado en ambos márgenes, dando un aspecto más formal.</td>
+                        <td style="text-align: center;"><img src="https://i.ibb.co/1tHq6pKQ/image.png" alt="Alineación" style="max-width: 130px; height: auto; border: 1px solid var(--gray); border-radius: 4px; padding: 2px;"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Sangría:</strong> aumenta o disminuye el espacio al inicio de un párrafo.</td>
+                        <td style="text-align: center;"><img src="https://i.ibb.co/YBkH2YKn/image.png" alt="Sangría" style="height: 35px; border: 1px solid var(--gray); border-radius: 4px; padding: 2px;"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Interlineado:</strong> ajusta el espacio entre líneas (ejemplo: 1.0, 1.5, 2.0).</td>
+                        <td style="text-align: center;"><img src="https://i.ibb.co/LXqGQ08K/image.png" alt="Interlineado" style="height: 35px; border: 1px solid var(--gray); border-radius: 4px; padding: 2px;"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ordenar:</strong> organiza párrafos o listas en orden alfabético o numérico.</td>
+                        <td style="text-align: center;"><img src="https://i.ibb.co/MkSjLXJd/image.png" alt="Ordenar" style="height: 35px; border: 1px solid var(--gray); border-radius: 4px; padding: 2px;"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bordes y sombreado:</strong> agregan líneas o colores de fondo a un párrafo para destacarlo.</td>
+                        <td style="text-align: center;"><img src="https://i.ibb.co/wFYqs6YJ/image.png" alt="Bordes y sombreado" style="height: 35px; border: 1px solid var(--gray); border-radius: 4px; padding: 2px;"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Mostrar marcas de párrafo (¶):</strong> permite visualizar saltos de línea y espacios, útil para revisar la redacción.</td>
+                        <td style="text-align: center;"><img src="https://i.ibb.co/WWFR7m7r/image.png" alt="Mostrar marcas de párrafo" style="height: 35px; border: 1px solid var(--gray); border-radius: 4px; padding: 2px;"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Configuración de Párrafo en Word</h2>
+            <p>La ventana de configuración de Párrafo permite ajustar con precisión cómo se presenta el texto en un documento. Es una herramienta clave para garantizar que los párrafos estén bien organizedos, con una redacción clara y ortografía cuidada.</p>
+            <h3>Secciones principales</h3>
+            <ul>
+                <li><strong>General</strong>
+                    <ul>
+                        <li>Alineación: define cómo se distribuye el texto (izquierda, derecha, centrado, justificado).</li>
+                        <li>Nivel de esquema: indica si el texto es independiente o parte de una jerarquía (útil en documentos largos).</li>
+                    </ul>
+                </li>
+                <li><strong>Sangría</strong>
+                    <ul>
+                        <li>Izquierda/Derecha: ajusta el espacio desde los márgenes hacia el texto.</li>
+                        <li>Especial: permite aplicar sangría de primera línea o francesa (muy usada en ensayos y bibliografía).</li>
+                    </ul>
+                </li>
+                <li><strong>Espaciado</strong>
+                    <ul>
+                        <li>Anterior/Posterior: controla el espacio antes y después de cada párrafo.</li>
+                        <li>Interlineado: define la separación entre líneas (ejemplo: 1.0, 1.5, 2.0).</li>
+                        <li>No agregar espacio entre párrafos del mismo estilo: útil para mantener uniformidad en textos continuos.</li>
+                    </ul>
+                </li>
+                <li><strong>Vista previa:</strong> muestra cómo quedará el párrafo con la configuración elegida.</li>
+            </ul>
+
+            <div class="actividad">
+                <h3>Actividad práctica 06</h3>
+                <a href="ms-word:" class="btn-word">📝 Abrir Microsoft Word</a>
+                <p>1. Escribe un párrafo sobre la importancia de cuidar la ortografía y la redacción en tus trabajos escolares.</p>
+                <p>2. Redacta una lista con tres razones por las que la ortografía es importante.</p>
+                <p>3. Aplica las siguientes herramientas del grupo Párrafo:</p>
+                <ul>
+                    <li>Usa viñetas para organizar las tres razones.</li>
+                    <li>Alinea el párrafo en justificado para darle un aspecto formal.</li>
+                    <li>Configura una sangría de primera línea de 1 cm.</li>
+                    <li>Ajusta el interlineado a 1.5 para mejorar la legibilidad.</li>
+                    <li>Establece un espaciado anterior de 6 ptos y un espaciado posterior de 6 ptos.</li>
+                    <li>Resalta el párrafo con un sombreado suave.</li>
+                </ul>
+                <p>4. Revisa tu texto utilizando la opción de marcas de párrafo (¶) para asegurarte de que la redacción esté clara y sin errores de formato.</p>
+            </div>
+        </section>
+
+        <section id="estilos">
+            <h2>Grupo Estilos</h2>
+            <img src="https://i.ibb.co/C5tj1sh0/10-Estilos.png" alt="10Estilos" class="img-directa">
+            <img src="https://i.ibb.co/nqM6QF10/10-1estilos.png" alt="10 1estilos" class="img-directa">
+            <p>El grupo Estilos permite aplicar formatos predefinidos al texto, lo que facilita mantener la coherencia, claridad y buena redacción en un documento. En lugar de dar formato manual a cada parte, los estilos aseguran uniformidad y profesionalismo.</p>
+            <h3>Principales estilos disponibles</h3>
+            <ul>
+                <li><strong>Normal:</strong> formato estándar para el cuerpo del texto.</li>
+                <li><strong>Sin espacio:</strong> texto sin espaciado adicional entre párrafos.</li>
+                <li><strong>Título 1, Título 2, Título:</strong> jerarquizan la información, útiles para organizar documentos largos.</li>
+                <li><strong>Subtítulo:</strong> complementa el título principal con un estilo diferenciado.</li>
+                <li><strong>Énfasis sutil / Énfasis:</strong> resaltan ideas importantes con variaciones de color o tipografía.</li>
+            </ul>
+            <h3>¿Por qué usar estilos?</h3>
+            <ul>
+                <li>Garantizan uniformidad en todo el documento.</li>
+                <li>Facilitan la lectura y comprensión del texto.</li>
+                <li>Permiten generar automáticamente índices y esquemas.</li>
+                <li>Refuerzan la importancia de cuidar la ortografía y redacción, ya que un texto bien escrito y con estilo claro transmite mejor las ideas.</li>
+            </ul>
+
+            <div class="actividad">
+                <h3>Actividad práctica 07</h3>
+                <a href="ms-word:" class="btn-word">📝 Abrir Microsoft Word</a>
+                <ul>
+                    <li>Abre un documento en Word.</li>
+                    <li>Digita el título principal: “Deportes y su importancia”.
+                        <ul>
+                            <li>Aplica el estilo Título 1.</li>
+                        </ul>
+                    </li>
+                    <li>Escribe un subtítulo debajo del título: “Actividades que fortalecen cuerpo y mente”.
+                        <ul>
+                            <li>Aplica el estilo Subtítulo.</li>
+                        </ul>
+                    </li>
+                    <li>Copia el siguiente texto en el documento:
+                        <div class="text-box">
+                            El fútbol es un deporte muy popular en el mundo. El baloncesto también es practicado por millones de personas. El atletismo es considerado la base de muchos deportes. La natación fortalece el cuerpo y mejora la resistencia. El ciclismo es una disciplina que requiere esfuerzo y dedicación.
+                        </div>
+                    </li>
+                    <li>Organiza el texto aplicando los estilos:
+                        <ul>
+                            <li>Usa el estilo Normal para cada párrafo de deporte.</li>
+                            <li>Resalta con estilo Énfasis el deporte que más te guste.</li>
+                            <li>Si lo deseas, aplica Énfasis sutil a otro deporte que consideres importante.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="actividad">
+                <h3>Actividad integradora 02 – Autorregulación y Gestión Emocional</h3>
+                <a href="ms-word:" class="btn-word">📝 Abrir Microsoft Word</a>
+                <p>Objetivo: aplicar las herramientas de los grupos Párrafo y Estilos en Word para organizar un texto sobre la autorregulación emocional, y luego crear un mensaje decorado con WordArt que refleje lo aprendido.</p>
+                <p>Copia el siguiente texto en un documento de Word:</p>
+                <div class="text-box">
+                    <p>La autorregulación emocional es la capacidad de reconocer y manejar nuestras emociones de manera consciente y adecuada. En la vida escolar, esta competencia resulta fundamental para enfrentar los retos académicos y convivir de manera positiva con los demás. Cuando un estudiante aprende a controlar el estrés, puede rendir mejor en las evaluaciones y mantener la calma en momentos de presión. Por ejemplo, antes de una exposición oral es normal sentir nerviosismo, pero la autorregulación permite transformar esa energía en motivación y seguridad.</p>
+                    <p>La gestión emocional también ayuda a evitar respuestas impulsivas frente a conflictos. En lugar de reaccionar con enojo, el estudiante puede detenerse, reflexionar y buscar soluciones constructivas. Estrategias como la respiración consciente, esperar antes de responder y pedir ayuda de manera asertiva fortalecen esta habilidad. Estas prácticas no solo mejoran la convivencia, sino que también desarrollan resiliencia, entendida como la capacidad de superar dificultades y seguir adelante.</p>
+                    <p>Es importante comprender que autorregularse no significa reprimir las emociones, sino aprender a expresarlas de forma adecuada. El enojo, la tristeza o la alegría cumplen un papel en nuestra vida, y reconocerlos nos ayuda a crecer. Al practicar la autorregulación, los estudiantes logran tomar decisiones más responsables y éticas, pues piensan con claridad y consideran el impacto de sus acciones en los demás.</p>
+                    <p>En conclusión, la autorregulación emocional es una competencia esencial para la vida escolar y personal. Permite enfrentar los desafíos con serenidad, fomenta la convivencia respetuosa y prepara a los estudiantes para la vida adulta, donde deberán tomar decisiones importantes y convivir en sociedad.</p>
+                </div>
+                <h4>Instrucciones</h4>
+                <ul>
+                    <li>Título principal: digita “Autorregulación y Gestión Emocional” y aplícale el estilo Título 1.</li>
+                    <li>Subtítulo: escribe debajo “Claves para manejar nuestras emociones” y aplícale el estilo Subtítulo.</li>
+                    <li>Texto base: pega el texto anterior y aplícale el estilo Normal.</li>
+                    <li>Organización con grupo Párrafo:
+                        <ul>
+                            <li>Alinea el texto en justificado.</li>
+                            <li>Aplica interlineado 1.5.</li>
+                            <li>Configura espaciado posterior de 6 ptos.</li>
+                            <li>Usa viñetas para listar las estrategias de autorregulación (respiración consciente, esperar antes de responder, pedir ayuda).</li>
+                        </ul>
+                    </li>
+                    <li>Énfasis: aplica el estilo Énfasis a la frase “La autorregulación emocional es la capacidad de reconocer y manejar nuestras emociones”.</li>
+                    <li>Énfasis sutil: aplica este estilo a la frase “La gestión emocional también ayuda a evitar respuestas impulsivas frente a conflictos”.</li>
+                </ul>
+                <h4>Creación con WordArt</h4>
+                <p>Al final del documento, escribe un mensaje motivador:<br>
+                “Con calma y responsabilidad puedo superar cualquier reto”</p>
+                <ul>
+                    <li>Aplica un estilo de WordArt llamativo para decorar el mensaje.</li>
+                </ul>
+                <h4>Reflexión socioemocional</h4>
+                <p>Responde en el mismo documento:</p>
+                <ul>
+                    <li>¿Qué estrategias de autorregulación emocional practicas en tu vida escolar?</li>
+                    <li>¿Cómo te ayuda organizar el texto con estilos y párrafo a comprender mejor el tema?</li>
+                    <li>¿Por qué es importante expresar mensajes positivos con creatividad y buena presentación?</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="evaluacion" class="quiz-container">
+            <h2>Cuestionario Final de Conocimientos</h2>
+            <p>Comprueba lo que has aprendido. Tienes <strong>2 intentos</strong> y el sistema guardará la nota más alta que logres.</p>
+            
+            <label for="studentName"><strong>Ingresa tu nombre completo:</strong></label>
+            <input type="text" id="studentName" placeholder="Escribe tu nombre aquí...">
+
+            <div id="quizForm">
+                <div class="question">
+                    <p><strong>1. ¿Desde qué sección puedes guardar tu trabajo o exportarlo como PDF?</strong></p>
+                    <label><input type="radio" name="q1" value="0"> Pestaña Insertar</label>
+                    <label><input type="radio" name="q1" value="1"> Pestaña Archivo (Vista Backstage)</label>
+                    <label><input type="radio" name="q1" value="0"> Pestaña Referencias</label>
+                </div>
+                <div class="question">
+                    <p><strong>2. ¿Qué función cumple el botón de "Copiar formato"?</strong></p>
+                    <label><input type="radio" name="q2" value="0"> Duplica un bloque de texto entero.</label>
+                    <label><input type="radio" name="q2" value="1"> Transfiere el estilo visual de una sección a otra.</label>
+                    <label><input type="radio" name="q2" value="0"> Elimina el estilo que tiene el texto.</label>
+                </div>
+                <div class="question">
+                    <p><strong>3. En las opciones de corrección, ¿qué casilla es recomendable mantener activa?</strong></p>
+                    <label><input type="radio" name="q3" value="0"> Omitir palabras en MAYÚSCULAS.</label>
+                    <label><input type="radio" name="q3" value="1"> Marcar palabras repetidas.</label>
+                    <label><input type="radio" name="q3" value="0"> Ocultar errores ortográficos.</label>
+                </div>
+                <div class="question">
+                    <p><strong>4. ¿En qué grupo encuentras las opciones para alinear, poner viñetas y cambiar el interlineado?</strong></p>
+                    <label><input type="radio" name="q4" value="1"> Grupo Párrafo</label>
+                    <label><input type="radio" name="q4" value="0"> Grupo Fuente</label>
+                    <label><input type="radio" name="q4" value="0"> Grupo Estilos</label>
+                </div>
+                <div class="question">
+                    <p><strong>5. ¿Cuál es la principal ventaja de utilizar los Estilos (como Título 1 o Normal)?</strong></p>
+                    <label><input type="radio" name="q5" value="0"> Insertar tablas rápidamente.</label>
+                    <label><input type="radio" name="q5" value="1"> Mantener un diseño uniforme y ordenar jerárquicamente.</label>
+                    <label><input type="radio" name="q5" value="0"> Aumentar el tamaño de la hoja de trabajo.</label>
+                </div>
+                
+                <button type="button" id="submitBtn" onclick="evaluateQuiz()">Evaluar mis respuestas</button>
+                <p id="attemptInfo" class="attempt-info">Intentos disponibles: 2</p>
+            </div>
+        </section>
+
+        <footer>
+            <p>Todos los derechos reservados. Ing Pedro Javier Fuentes Parada 2026.</p>
+        </footer>
+
+    </main>
+
+    <div class="modal" id="resultModal">
+        <div class="modal-content">
+            <h2>¡Calificación Obtenida!</h2>
+            <p class="modal-student-name">Estudiante: <strong id="modalName"></strong></p>
+            <div class="score-display" id="modalScore">0.0</div>
+            <div class="range-display" id="modalRange">Rango</div>
+            <p><em>Por favor, toma una captura de pantalla de este cuadro para enviarla a tu profesor.</em></p>
+            <button class="close-btn" onclick="closeModal()">Cerrar Ventana</button>
+        </div>
+    </div>
+
+    <script>
+        let attemptsLeft = 2;
+        let bestScore = 0;
+
+        function evaluateQuiz() {
+            const nameInput = document.getElementById("studentName").value.trim();
+            if (!nameInput) {
+                alert("Debes escribir tu nombre para poder enviar el cuestionario.");
+                return;
+            }
+
+            let answeredAll = true;
+            let score = 0;
+            const totalQuestions = 5;
+
+            for (let i = 1; i <= totalQuestions; i++) {
+                const radios = document.getElementsByName("q" + i);
+                let questionAnswered = false;
+                for (let radio of radios) {
+                    if (radio.checked) {
+                        questionAnswered = true;
+                        score += parseInt(radio.value);
+                        break;
+                    }
+                }
+                if (!questionAnswered) answeredAll = false;
+            }
+
+            if (!answeredAll) {
+                alert("Te falta responder algunas preguntas. Revisa y completa todo.");
+                return;
+            }
+
+            let finalNote = (score / totalQuestions) * 10;
+            
+            if (finalNote > bestScore) {
+                bestScore = finalNote;
+            }
+
+            attemptsLeft--;
+            document.getElementById("attemptInfo").innerText = `Intentos disponibles: ${attemptsLeft}`;
+
+            showModal(nameInput, finalNote);
+
+            if (attemptsLeft <= 0) {
+                const btn = document.getElementById("submitBtn");
+                btn.disabled = true;
+                btn.innerText = "Ya no tienes más intentos";
+                document.getElementById("attemptInfo").innerText = `Tu calificación final (la más alta) fue: ${bestScore.toFixed(1)}`;
+            }
+        }
+
+        function showModal(name, score) {
+            document.getElementById("modalName").innerText = name;
+            document.getElementById("modalScore").innerText = score.toFixed(1);
+            
+            const rangeElement = document.getElementById("modalRange");
+            
+            if (score <= 6.9) {
+                rangeElement.innerText = "Rendimiento: Bajo";
+                rangeElement.style.backgroundColor = "#FEE2E2";
+                rangeElement.style.color = "#991B1B";
+            } else if (score <= 7.9) {
+                rangeElement.innerText = "Rendimiento: Básico";
+                rangeElement.style.backgroundColor = "#FEF3C7";
+                rangeElement.style.color = "#92400E";
+            } else if (score <= 8.9) {
+                rangeElement.innerText = "Rendimiento: Alto";
+                rangeElement.style.backgroundColor = "#DBEAFE";
+                rangeElement.style.color = "#1E40AF";
+            } else {
+                rangeElement.innerText = "Rendimiento: Superior";
+                rangeElement.style.backgroundColor = "#D1FAE5";
+                rangeElement.style.color = "#065F46";
+            }
+
+            document.getElementById("resultModal").style.display = "flex";
+        }
+
+        function closeModal() {
+            document.getElementById("resultModal").style.display = "none";
+        }
+    </script>
+</body>
+</html>
